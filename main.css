@@ -15,7 +15,6 @@ html, body {
 
 p, a, span {
 	color: var(--main-color);
-	font-size: 20px;
 	font-size: 1em;
 	text-decoration: none;
 }
@@ -40,15 +39,13 @@ div.nav_bar {
 	z-index: 1;
 }
 .nav_bar ul li a span.dot{
-	margin: -0.6vh 0;
-	border: 3px solid var(--main-color);
-	border: 0.5vh solid var(--main-color);
+	margin: -0.2em 0;
+	border: 0.2em solid var(--main-color);
 	position: relative;
 	display: inline-block;
 	background-color: var(--main-color);
-	height: 2vh;
-	position: relative;
-	width: 2vh;
+	height: 0.8em;
+	width: 0.8em;
 	border-radius: 40%;
 	-webkit-transition: -webkit-transform .2s,background-color .5s;
 	-moz-transition: -moz-transform .2s,background-color .5s;
@@ -56,11 +53,10 @@ div.nav_bar {
 	-webkit-transform-origin: 50% 50%;
 	-moz-transform-origin: 50% 50%;
 	-ms-transform-origin: 50% 50%;
-	-o-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
 	transform: scale(.6);
 	padding: 0;
-	box-shadow: 0 0 2px var(--highlight-color);
+	box-shadow: 0 0 0.1em var(--highlight-color);
 }
 
 .nav_bar ul li a.is-selected span.dot{
@@ -76,9 +72,8 @@ div.nav_bar {
 	-webkit-transform-origin: 100% 50%;
 	-moz-transform-origin: 100% 50%;
 	-ms-transform-origin: 100% 50%;
-	-o-transform-origin: 100% 50%;
 	transform-origin: 100% 50%;
-	margin-left: 1vh;
+	margin-left: 0.5em;
 	font-weight: bold;
 }
 
@@ -96,12 +91,29 @@ div.nav_bar {
 
 ul {
 	list-style: none;
-	padding-left: 2vh;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	padding-inline-start: 2vh;
-	margin-block-start: 0;
-	margin-block-end: 0;
+	padding-left: 0.5em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+
+  /*****************/
+ /* Contact Icons */
+/*****************/
+
+div.contactBlock {
+	display: inline-block;
+	position: fixed;
+	right: 0;
+	height: 2.5em;
+	top: 0.6em;
+	z-index: 1;
+}
+
+.contactIcon {
+	padding-right: 0.4em;
+	display: inline;
+	color: var(--main-color);
 }
 
   /**************/
@@ -112,8 +124,7 @@ ul {
 	position: fixed;
 	right: 0.5em;
 	bottom: 0.5em;
-	width: 5em;
-	max-width: 10%;
+	height: 3em;
 	z-index: 1;
 }
 
@@ -130,7 +141,7 @@ ul {
 	height: 100vh;
 }
 .background_one {
-	padding-top: 10%;
+	padding-top: 3em;
 	text-align: center;
 	background-color: #808080;
 }
@@ -145,23 +156,4 @@ ul {
 }
 .background_five {
 	background-color: #707070;
-}
-
-
-  /*****************/
- /* Contact Icons */
-/*****************/
-
-div.contactBlock {
-	display: inline-block;
-	position: fixed;
-	right: 0;
-	height: 2.5em;
-	z-index: 1;
-}
-
-.contactIcon {
-	padding: 0.6em 0.4em 0 0;
-	display: inline;
-	color: var(--main-color);
 }
