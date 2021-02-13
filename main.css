@@ -4,11 +4,16 @@
 
 :root {
     --main-color:#000;
-    --highlight-color:#fff;
+    --secondary-color:#fff;
+	--tertiary-color:#E1AD01;
+}
+
+body {
+	overflow-x: hidden;
 }
 
 html, body {
-	height: 100%;
+	height: 100vh;
 	margin: 0;
 	font-family: Segoe UI;
 }
@@ -56,11 +61,11 @@ div.nav_bar {
 	transform-origin: 50% 50%;
 	transform: scale(.6);
 	padding: 0;
-	box-shadow: 0 0 0.1em var(--highlight-color);
+	box-shadow: 0 0 0.1em var(--secondary-color);
 }
 
 .nav_bar ul li a.is-selected span.dot{
-	background-color: var(--highlight-color);
+	background-color: var(--secondary-color);
 }
 
 .nav_bar ul li a span.label{
@@ -128,6 +133,35 @@ div.contactBlock {
 	z-index: 1;
 }
 
+
+  /************/
+ /* Headings */
+/************/
+
+p.heading {
+	color: var(--main-color);
+	display: inline-block;
+	font-size: 2em;
+	position: sticky;
+	font-weight: bold;
+	margin-bottom: 0;
+	margin-left: 50vw;
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+hr {
+	margin-top: 0;
+    border: none;
+    height: 0.2em;
+	width: 4em;
+    color: var(--tertiary-color);
+    background-color: var(--tertiary-color);
+	margin-left: 50vw;
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
   /**************/
  /* Background */
 /**************/
@@ -139,10 +173,9 @@ div.contactBlock {
 	background-repeat: no-repeat;
 	background-size: cover;
 	height: 100vh;
+	width: 100vw;
 }
 .background_one {
-	padding-top: 3em;
-	text-align: center;
 	background-color: #808080;
 }
 .background_two {

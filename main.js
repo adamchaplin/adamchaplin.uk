@@ -44,7 +44,9 @@ $(document).ready(function() {
 
 	// Gets each background_layer item and each navigation item
 	let contentSections = $('.background_layer'),
-		navigationItems = $('.nav_bar a');
+		navigationItems = $('.nav_bar a'),
+		headingItems = $('.heading'),
+		headingLineItems = $('.headingLine');
 		
 	// Updates the navigation dot on page load
 	updateNavigation();
@@ -52,6 +54,7 @@ $(document).ready(function() {
 	// Updates the navigation dot when a user, or a js function, scrolls
 	$(window).on('scroll', function() {
 		updateNavigation();
+		scrollEffect();
 	});
 
 	// Function that updates the navigation dot to highlight the current page
@@ -66,6 +69,20 @@ $(document).ready(function() {
 			} else {
 				navigationItems.eq(activeSection).removeClass('is-selected');
 			}
+		});
+	}
+	
+	// Function that updates positions of all headings and lines
+	function scrollEffect() {
+		// Loop through each heading item
+		Array.prototype.forEach.call(headingItems, function(element) {
+			// Magic maths that updates the left margin depending on the position of it's background_layer
+			element.style.marginLeft =  Math.min(-(element.parentElement.getBoundingClientRect().top/6) + 50, 50) + "vw"
+		});
+		// Loop through each heading line item
+		Array.prototype.forEach.call(headingLineItems, function(element) {
+			// Magic maths that updates the left margin depending on the position of it's background_layer
+			element.style.marginLeft =  Math.max((element.parentElement.getBoundingClientRect().top/6) + 50, 50) + "vw"
 		});
 	}
 });
