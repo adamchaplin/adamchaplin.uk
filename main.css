@@ -20,6 +20,7 @@ html, body {
 
 p, a, span {
 	color: var(--main-color);
+	color: #000;
 	font-size: 1em;
 	text-decoration: none;
 }
@@ -46,9 +47,11 @@ div.nav_bar {
 .nav_bar ul li a span.dot{
 	margin: -0.2em 0;
 	border: 0.2em solid var(--main-color);
+	border: #000;
 	position: relative;
 	display: inline-block;
 	background-color: var(--main-color);
+	background-color: #000;
 	height: 0.8em;
 	width: 0.8em;
 	border-radius: 40%;
@@ -62,10 +65,12 @@ div.nav_bar {
 	transform: scale(.6);
 	padding: 0;
 	box-shadow: 0 0 0.1em var(--secondary-color);
+	box-shadow: 0 0 0.1em #fff;
 }
 
 .nav_bar ul li a.is-selected span.dot{
 	background-color: var(--secondary-color);
+	background-color: #fff;
 }
 
 .nav_bar ul li a span.label{
@@ -119,6 +124,7 @@ div.contactBlock {
 	padding-right: 0.4em;
 	display: inline;
 	color: var(--main-color);
+	color: #000
 }
 
   /**************/
@@ -140,9 +146,9 @@ div.contactBlock {
 
 p.heading {
 	color: var(--main-color);
+	color: #000;
 	display: inline-block;
 	font-size: 2em;
-	position: sticky;
 	font-weight: bold;
 	margin-bottom: 0;
 	margin-left: 50vw;
@@ -156,7 +162,9 @@ hr {
     height: 0.2em;
 	width: 4em;
     color: var(--tertiary-color);
+	color: #fff;
     background-color: var(--tertiary-color);
+	background-color: #fff;
 	margin-left: 50vw;
 	-ms-transform: translateX(-50%);
 	transform: translateX(-50%);
