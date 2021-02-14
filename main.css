@@ -19,7 +19,7 @@ html, body {
 }
 
 p, a, span {
-	color: var(--main-color);
+	color: var(--main-color) !important;
 	color: #000;
 	font-size: 1em;
 	text-decoration: none;
@@ -46,11 +46,11 @@ div.nav_bar {
 }
 .nav_bar ul li a span.dot{
 	margin: -0.2em 0;
-	border: 0.2em solid var(--main-color);
+	border: 0.2em solid var(--main-color) !important;
 	border: #000;
 	position: relative;
 	display: inline-block;
-	background-color: var(--main-color);
+	background-color: var(--main-color) !important;
 	background-color: #000;
 	height: 0.8em;
 	width: 0.8em;
@@ -64,12 +64,12 @@ div.nav_bar {
 	transform-origin: 50% 50%;
 	transform: scale(.6);
 	padding: 0;
-	box-shadow: 0 0 0.1em var(--secondary-color);
+	box-shadow: 0 0 0.1em var(--secondary-color) !important;
 	box-shadow: 0 0 0.1em #fff;
 }
 
 .nav_bar ul li a.is-selected span.dot{
-	background-color: var(--secondary-color);
+	background-color: var(--secondary-color) !important;
 	background-color: #fff;
 }
 
@@ -123,7 +123,7 @@ div.contactBlock {
 .contactIcon {
 	padding-right: 0.4em;
 	display: inline;
-	color: var(--main-color);
+	color: var(--main-color) !important;
 	color: #000
 }
 
@@ -145,7 +145,7 @@ div.contactBlock {
 /************/
 
 p.heading {
-	color: var(--main-color);
+	color: var(--main-color) !important;
 	color: #000;
 	display: inline-block;
 	font-size: 2em;
@@ -161,9 +161,9 @@ hr {
     border: none;
     height: 0.2em;
 	width: 4em;
-    color: var(--tertiary-color);
+    color: var(--tertiary-color) !important;
 	color: #fff;
-    background-color: var(--tertiary-color);
+    background-color: var(--tertiary-color) !important;
 	background-color: #fff;
 	margin-left: 50vw;
 	-ms-transform: translateX(-50%);
@@ -197,4 +197,45 @@ hr {
 }
 .background_five {
 	background-color: #707070;
+}
+
+  /*****************/
+ /* Photo Gallery */
+/*****************/
+
+#photoGallery {
+	padding: 1vh 3vw;
+}
+.photo {
+	float: right;
+	display: inline-block;
+    width: 23.5vw;
+    height: 23.5vw;
+	
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .photo {
+    float: right;
+	display: inline-block;
+    width: 47vw;
+    height: 47vw;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .photo {
+    float: right;
+	display: inline-block;
+    width: 94vw;
+    height: 94vw;
+  }
+}
+
+.photo img { 
+	height: inherit;
+    width: inherit;
+    object-fit: cover;
 }

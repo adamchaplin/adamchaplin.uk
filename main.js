@@ -1,6 +1,17 @@
 $(document).ready(function() {
 	// Check for smartphones and tablets (Doesn't detect touch screen PCs)
 	var touchDevice = 'ontouchstart' in document.documentElement;
+	// Gets each background_layer item and each navigation item
+	let contentSections = $('.background_layer'),
+		navigationItems = $('.nav_bar a'),
+		headingItems = $('.heading'),
+		headingLineItems = $('.headingLine');
+		
+	// Updates the navigation dot on page load
+	updateNavigation();
+	// Gets a new set of photos on page load
+	generatePhotos();
+	
 	// Smooth scrolling for links
 	$("a").on('click', function(event) {
 
@@ -43,15 +54,6 @@ $(document).ready(function() {
 			}, 100 * i);
 		});
 	}, 500);
-
-	// Gets each background_layer item and each navigation item
-	let contentSections = $('.background_layer'),
-		navigationItems = $('.nav_bar a'),
-		headingItems = $('.heading'),
-		headingLineItems = $('.headingLine');
-		
-	// Updates the navigation dot on page load
-	updateNavigation();
 	
 	// Updates the navigation dot when a user, or a js function, scrolls
 	$(window).on('scroll', function() {
@@ -95,5 +97,31 @@ $(document).ready(function() {
 				element.style.marginLeft =  Math.max((element.parentElement.getBoundingClientRect().top/ratio) + 50, 50) + "vw"
 			});
 		}
+	}
+	
+	// Function that generates a set of photos and appends them to the photoGallery element
+	function generatePhotos() {
+		let numbers = [];
+		let i;
+		// Loops through the number of photos needed
+		for (i = 1; i < 9; i++) {
+			do {
+				// Generates a random number between 1 and the number of photos available
+				var rand = Math.floor((Math.random() * 106) + 1);
+				// Checks if the number has already been generated this round
+				var check = numbers.includes(rand);	
+				numbers.push(rand);
+			} while (check);
+			
+			// greates a photos div element and the img element
+			let div = document.createElement("div");
+			div.setAttribute("class", "photo");
+			let img = document.createElement("IMG");
+			img.setAttribute("src", "images/compressed/" + rand + ".jpeg");
+			// Adds the img element to the div then the div element to the photoGallery
+			div.appendChild(img);
+			document.getElementById('photoGallery').appendChild(div);  
+		}
+		
 	}
 });
