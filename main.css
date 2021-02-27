@@ -44,6 +44,13 @@ p, a, span {
 	transform: translateY(-50%);
 	z-index: 1;
 }
+
+@media screen and (max-aspect-ratio: 1/1) {
+	#nav_bar  li{
+		padding-top: 3vh;
+	}
+}
+
 #nav_bar ul li a span.dot{
 	margin: -0.2em 0;
 	border: 0.2em solid var(--main-color) !important;
@@ -87,6 +94,15 @@ p, a, span {
 	font-weight: bold;
 }
 
+@media screen and (max-aspect-ratio: 1/1) {	
+	#nav_bar ul li a span.label{
+		writing-mode: tb-rl;
+		-ms-transform: translateY(45%);
+		transform: translateY(45%);
+		
+	}
+}
+
 #nav_bar ul li a:hover span.dot{
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
@@ -106,12 +122,11 @@ ul {
 	margin-bottom: 0;
 }
 
-
   /*****************/
  /* Contact Icons */
 /*****************/
 
-div.contactBlock {
+div.contact_block {
 	display: inline-block;
 	position: fixed;
 	right: 0;
@@ -120,7 +135,7 @@ div.contactBlock {
 	z-index: 1;
 }
 
-.contactIcon {
+.contact_icon {
 	padding-right: 0.4em;
 	display: inline;
 	color: var(--main-color) !important;
@@ -138,7 +153,6 @@ div.contactBlock {
 	height: 3em;
 	z-index: 1;
 }
-
 
   /************/
  /* Headings */
@@ -184,20 +198,26 @@ hr {
 	min-width: 100vw;
 	padding-bottom: 1vh;
 }
+
 .background_one {
 	background-color: #808080;
 }
+
 .background_two {
 	background-color: #d0d0d0;
 }
+
 .background_three {
 	background-color: #a0a0a0;
 }
+
 .background_four {
 	background-color: #c0c0c0;
 }
+
 .background_five {
 	background-color: #707070;
+	min-height: 100vh;
 }
 
   /***********/
@@ -208,15 +228,13 @@ hr {
 	display: inline-block;
 	font-size: 3em;
 	font-weight: bold;
-    /*writing-mode: tb-rl;*/
-	/*transform: rotate(180deg);*/
 }
 
   /**************/
  /* Experience */
 /**************/
 
-#experienceTimeline {
+#experience_timeline {
 	padding: 1vh 1vw 1vh 0;
 	display: inline-block;
 }
@@ -225,17 +243,16 @@ hr {
     border-bottom: 3px solid #fff;
 	display: inline-block;
 	padding: 1em;
-    /*writing-mode: tb-rl;*/
-	/*transform: rotate(180deg);*/
 }
 
   /*****************/
  /* Photo Gallery */
 /*****************/
 
-#photoGallery {
+#photo_gallery {
 	display: inline-block;
 }
+
 .photo {
     width: 20vw;
     height: 20vw;
