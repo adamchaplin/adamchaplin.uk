@@ -66,7 +66,7 @@ $(document).ready(function() {
 	// Updates the navigation dot when a user, or a js function, scrolls
 	$(window).on('scroll', function() {
 		updateNavigation();
-		scrollEffect();
+		//scrollEffect(); stopped this due to it looking funny with the nav separator
 	});
 
 	// Updates the nav when window is resized
@@ -135,20 +135,24 @@ $(document).ready(function() {
 	
 	// Adds padding to all backgrounds that need it
 	function addAllPadding() {
+		let navLine = document.getElementById('nav_separator');
 		let aboutBlock = document.getElementById('about_block');
 		let experienceTimeline = document.getElementById('experience_timeline');
 		let educationTimeline = document.getElementById('education_timeline');
+		let programmingTimeline = document.getElementById('programming_timeline');
 		let photoGallery = document.getElementById('photo_gallery');
-		addPadding(aboutBlock);
-		addPadding(experienceTimeline);
-		addPadding(educationTimeline);
-		addPadding(photoGallery);
+		addPadding(navLine, 1.04);
+		addPadding(aboutBlock, 1.1);
+		addPadding(experienceTimeline, 1.1);
+		addPadding(educationTimeline, 1.1);
+		addPadding(programmingTimeline, 1.1);
+		addPadding(photoGallery, 1.1);
 	}
 	
 	// Adds padding to the element 'el'
-	function addPadding(el) {
+	function addPadding(el, mul) {
 		let navWidth = document.getElementById('nav_bar').getBoundingClientRect().width;
-		el.style.paddingLeft = navWidth*1.1 + 'px';
+		el.style.marginLeft = navWidth*mul + 'px';
 	}
 	
 	// Adds experience information to the experience_timeline element
@@ -193,7 +197,7 @@ $(document).ready(function() {
 		let bgBound = document.getElementById('three').getBoundingClientRect();
 		// Education JSON object
 		let educationText = '{ "education" : [' +
-			'{ "place":"University of Reading, Analyst", "level":"BSc Computer Science", "grade":"First Class", "subjects":["Maths","Software Engineering","Databases","Software Quality and Testing","Information Security","Artificial Intelligence"]}' + 
+			'{ "place":"University of Reading", "level":"BSc Computer Science", "grade":"First Class", "subjects":["Maths","Software Engineering","Databases","Software Quality and Testing","Information Security","Artificial Intelligence"]}' + 
 			', { "place":"Barton Peveril College", "level":"A-Level", "grade":"BBC", "subjects":["Electronics","Computing","Maths"]}' + 
 			', { "place":"Brookfield School", "level":"GCSE", "grade":"10 A*-C", "subjects":["Maths(A)","English(CC)","Science(ABCC)"]}' + 
 			']}';
@@ -211,10 +215,16 @@ $(document).ready(function() {
 			placeEl.innerHTML = edObj.education[i].place;
 			let levelEl = document.createElement('p');
 			levelEl.innerHTML = edObj.education[i].level;
+			let subjectsEl = document.createElement('p');
+			subjectsEl.innerHTML = edObj.education[i].subjects;
+			let gradeEl = document.createElement('p');
+			gradeEl.innerHTML = edObj.education[i].grade;
 			
 			// Adds the elements to the div then the div element to education_timeline
 			div.appendChild(placeEl);
 			div.appendChild(levelEl);
+			div.appendChild(subjectsEl);
+			div.appendChild(gradeEl);
 			document.getElementById('education_timeline').appendChild(div);  
 		}
 	}

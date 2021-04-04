@@ -25,6 +25,14 @@ p, a, span {
 	text-decoration: none;
 }
 
+.vl {
+	border-left: 1px solid #000;
+	margin-top: 10vh;
+	height: 80vh;
+	z-index: 1;
+	position: fixed;
+}
+
   /**************/
  /* Scroll Bar */
 /**************/
@@ -165,13 +173,13 @@ p.heading {
 	font-size: 2em;
 	font-weight: bold;
 	margin-bottom: 0;
-	margin-left: 50vw;
+	/*margin-left: 50vw;
 	-ms-transform: translateX(-50%);
-	transform: translateX(-50%);
+	transform: translateX(-50%);*/
 }
 
 hr {
-	margin: 0 0 0 50vw;
+	/*margin: 0 0 0 50vw;*/
     border: none;
     height: 0.2em;
 	width: 4em;
@@ -179,8 +187,8 @@ hr {
 	color: #fff;
     background-color: var(--tertiary-color) !important;
 	background-color: #fff;
-	-ms-transform: translateX(-50%);
-	transform: translateX(-50%);
+	/*-ms-transform: translateX(-50%);
+	transform: translateX(-50%);*/
 }
 
   /**************/
@@ -197,6 +205,7 @@ hr {
 	width: 100vw;
 	min-width: 100vw;
 	padding-bottom: 1vh;
+	text-align: center;
 }
 
 .background_one {
@@ -228,6 +237,22 @@ hr {
 	display: inline-block;
 	font-size: 3em;
 	font-weight: bold;
+}
+
+
+  /*************/
+ /* Education */
+/*************/
+
+#education_timeline {
+	padding: 1vh 1vw 1vh 0;
+	display: inline-block;
+}
+
+.education {
+    border-bottom: 3px solid #fff;
+	display: inline-block;
+	padding: 1em;
 }
 
   /**************/
