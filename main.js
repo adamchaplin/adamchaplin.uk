@@ -17,6 +17,8 @@ $(document).ready(function() {
 	generateExperience();
 	// Loads all education data on page load
 	generateEducation();
+	// Loads all programming data on page load
+	generateProgramming();
 	// Gets a new set of photos on page load
 	generatePhotos();
 	
@@ -141,12 +143,14 @@ $(document).ready(function() {
 		let educationTimeline = document.getElementById('education_timeline');
 		let programmingTimeline = document.getElementById('programming_timeline');
 		let photoGallery = document.getElementById('photo_gallery');
+		let logoBackground = document.getElementById('logo_block');
 		addPadding(navLine, 1.04);
 		addPadding(aboutBlock, 1.1);
 		addPadding(experienceTimeline, 1.1);
 		addPadding(educationTimeline, 1.1);
 		addPadding(programmingTimeline, 1.1);
 		addPadding(photoGallery, 1.1);
+		addPadding(logoBackground, 1.04);
 	}
 	
 	// Adds padding to the element 'el'
@@ -227,6 +231,22 @@ $(document).ready(function() {
 			div.appendChild(gradeEl);
 			document.getElementById('education_timeline').appendChild(div);  
 		}
+	}
+	
+	// Adds programming information to the programming_timeline element
+	function generateProgramming() {
+		let programmingTimeline = document.getElementById('programming_timeline');
+		let bgBound = document.getElementById('four').getBoundingClientRect();
+		
+		// Creates an programming div element and adds styles and classes
+		let div = document.createElement('div');
+		div.setAttribute('class', 'programming');
+		div.style.minHeight = (bgBound.height-(programmingTimeline.y-bgBound.y)*1.5)/2 + 'px';
+		div.style.maxHeight = (bgBound.height-(programmingTimeline.y-bgBound.y)*1.5)/2 + 'px';
+		div.style.maxWidth = bgBound.width/3 + 'px';
+		
+		programmingTimeline.appendChild(div);  
+		
 	}
 	
 	// Generates a set of photos and adds them to the photoGallery element
