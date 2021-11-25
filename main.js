@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// Sets up constants
-	const photosAvailable = 106;
+	const photosAvailable = 200;
 	// Check for smartphones and tablets (Doesn't detect touch screen PCs)
 	var touchDevice = 'ontouchstart' in document.documentElement;
 	// Gets lists of items used throughout the code
@@ -257,7 +257,7 @@ $(document).ready(function() {
 		let photoWidth = (bgWidth-navWidth)/3 + 'px';
 		let numbers = [];
 		// Loops through the number of photos needed
-		for (let i = 1; i <= 8; i++) {
+		for (let i = 1; i <= 6; i++) {
 			do {
 				// Generates a random number between 1 and the number of photos available
 				var rand = Math.floor((Math.random() * photosAvailable) + 1);
@@ -270,7 +270,7 @@ $(document).ready(function() {
 			let div = document.createElement('div');
 			div.setAttribute('class', 'photo');
 			let img = document.createElement('img');
-			img.setAttribute('src', 'images/compressed/' + rand + '.jpeg');
+			img.setAttribute('src', 'images/compressed/' + rand + '.jpg');
 			// Adds the element to the div then the div element to the photoGallery
 			div.appendChild(img);
 			photoGallery.appendChild(div);  

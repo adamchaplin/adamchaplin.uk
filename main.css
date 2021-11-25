@@ -184,11 +184,17 @@ p.heading {
 	display: inline-block;
 	font-size: 2em;
 	font-weight: bold;
-	margin-top: 1.1em;
+	margin-top: 1.3em;
 	margin-bottom: 0;
-	/*margin-left: 50vw;
-	-ms-transform: translateX(-50%);
-	transform: translateX(-50%);*/
+}
+
+p.subHeading {
+	color: var(--main-color) !important;
+	color: #000;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 1.3em;
+	margin-bottom: 0;
 }
 
 hr {
@@ -298,16 +304,17 @@ hr {
 }
 
 .photo {
-    width: 20vw;
-    height: 20vw;
+	padding: 1em 0.7em 0 0.7em;
+    width: 24vw;
+    height: 16vw;
 	display: inline-block;
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
   .photo {
-    width: 35vw;
-    height: 35vw;
+    width: 33vw;
+    height: 22vw;
 	display: inline-block;
   }
 }
@@ -315,8 +322,8 @@ hr {
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .photo {
-    width: 70vw;
-    height: 70vw;
+    width: 69vw;
+    height: 46vw;
 	display: inline-block;
 	
   }
