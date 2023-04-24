@@ -71,7 +71,7 @@ $(document).ready(function() {
 	
 	// Updates the navigation dot when a user, or a js function, scrolls
 	$(window).on('scroll', function() {
-		if($(window).width()/$(window).height()>=1){
+		if(isScreenLandscape()){
 			updateNavigation();
 		}
 		//scrollEffect(); stopped this due to it looking funny with the nav separator
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	// Updates different aspects of the nav bar
 	function loadNav() {
 		// Checks if the aspect ratio is less than 1:1
-		if($(window).width()/$(window).height()>=1){
+		if(isScreenLandscape()){
 			document.getElementById('nav_bar').style.removeProperty("content-visibility");
 			document.getElementById('nav_separator').style.removeProperty("border");
 			// Updates the padding for all windows
@@ -185,7 +185,11 @@ $(document).ready(function() {
 			div.setAttribute('class', 'prof_experience');
 			div.style.minHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
 			div.style.maxHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
-			div.style.maxWidth = bgBound.width/4 + 'px';
+			if(isScreenLandscape()){
+				div.style.maxWidth = bgBound.width/4 + 'px';
+			} else {
+				div.style.maxWidth = bgBound.width/1.2 + 'px';
+			}
 		
 			let titleEl = document.createElement('p');
 			titleEl.innerHTML = jsonData.profExperience[i].title;
@@ -217,8 +221,12 @@ $(document).ready(function() {
 			div.setAttribute('class', 'vol_experience');
 			div.style.minHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
 			div.style.maxHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
-			div.style.maxWidth = bgBound.width/4 + 'px';
-		
+			if(isScreenLandscape()){
+				div.style.maxWidth = bgBound.width/4 + 'px';
+			} else {
+				div.style.maxWidth = bgBound.width/1.2 + 'px';
+			}
+
 			let titleVEl = document.createElement('p');
 			titleVEl.innerHTML = jsonData.volExperience[i].title;
 			let companyVEl = document.createElement('p');
@@ -246,8 +254,12 @@ $(document).ready(function() {
 			div.setAttribute('class', 'education');
 			div.style.minHeight = (bgBound.height-(educationTimeline.y-bgBound.y)*1.5)/2 + 'px';
 			div.style.maxHeight = (bgBound.height-(educationTimeline.y-bgBound.y)*1.5)/2 + 'px';
-			div.style.maxWidth = bgBound.width/3 + 'px';
-		
+			if(isScreenLandscape()){
+				div.style.maxWidth = bgBound.width/3 + 'px';
+			} else {
+				div.style.maxWidth = bgBound.width/1.2 + 'px';
+			}
+
 			let placeEl = document.createElement('p');
 			placeEl.innerHTML = jsonData.education[i].place;
 			let levelEl = document.createElement('p');
@@ -310,8 +322,12 @@ $(document).ready(function() {
 		}
 	}
 
+	function isScreenLandscape() {
+		return $(window).width()/$(window).height()>=1
+	}
+
 	// Gets the data
-	function getData(){
+	function getData() {
 		// JSON object of the date, would be nice to be in a database
 		let pretendDatabase = '{ "profExperience" : [' +
 		'{ "title":"Software Engineer", "company":"Nationwide Building Society", "location":"London, UK", "dates":"April 2021 - January 2022", "technologies":["Java","Spring Boot","Apigee","OpenShift","JavaScript","Mongo DB","Redis","Jenkins","Maven"], "desc":"I was a key member of the team tasked to transition code from external contractors to in-house. Despite many challenges faced, I persevered and remained focused on the project goals. Throughout the process, I collaborated closely with the security team to identify, prioritize and resolve issues in the existing code base." }' + 

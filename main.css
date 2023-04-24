@@ -341,7 +341,7 @@ hr {
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .photo {
-    width: 69vw;
+    width: 75vw;
     height: 46vw;
 	display: inline-block;
 	
