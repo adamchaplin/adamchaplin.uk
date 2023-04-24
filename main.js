@@ -9,14 +9,18 @@ $(document).ready(function() {
 		headingItems = $('.heading'),
 		headingLineItems = $('.heading_line');
 
+	let jsonData = getData()
+
 	// Adds 
 	loadNav();
 	// Updates the navigation dot on page load
 	updateNavigation();
-	// Loads all experince data on page load
-	generateExperience();
+	// Loads all professional experince data on page load
+	generateProfessionalExperience(jsonData);
+	// Loads all volunteer experince data on page load
+	generateVolunteerExperience(jsonData);
 	// Loads all education data on page load
-	generateEducation();
+	generateEducation(jsonData);
 	// Loads all programming data on page load
 	generateProgramming();
 	// Gets a new set of photos on page load
@@ -139,14 +143,16 @@ $(document).ready(function() {
 	function addAllPadding() {
 		let navLine = document.getElementById('nav_separator');
 		let aboutBlock = document.getElementById('about_block');
-		let experienceTimeline = document.getElementById('experience_timeline');
+		let profExperienceTimeline = document.getElementById('prof_experience_timeline');
+		let volExperienceTimeline = document.getElementById('vol_experience_timeline');
 		let educationTimeline = document.getElementById('education_timeline');
 		let programmingTimeline = document.getElementById('programming_timeline');
 		let photoGallery = document.getElementById('photo_gallery');
 		let logoBackground = document.getElementById('logo_block');
 		addPadding(navLine, 1.04);
 		addPadding(aboutBlock, 1.1);
-		addPadding(experienceTimeline, 1.1);
+		addPadding(profExperienceTimeline, 1.1);
+		addPadding(volExperienceTimeline, 1.1);
 		addPadding(educationTimeline, 1.1);
 		addPadding(programmingTimeline, 1.1);
 		addPadding(photoGallery, 1.1);
@@ -160,54 +166,72 @@ $(document).ready(function() {
 	}
 	
 	// Adds experience information to the experience_timeline element
-	function generateExperience() {
-		let experienceTimeline = document.getElementById('experience_timeline');
+	function generateProfessionalExperience(jsonData) {
+		let experienceTimeline = document.getElementById('prof_experience_timeline');
 		let bgBound = document.getElementById('two').getBoundingClientRect();
-		// Experience JSON object
-		let experienceText = '{ "experience" : [' +
-			'{ "title":"Technology Development Programme, Analyst", "company":"Nationwide Building Society", "location":"Swindon, UK", "dates":"September 2019 - present", "desc":"Following a 3-month training course on software development, I joined the digital API hub. This team was mainly focused on Open Banking and I spent the beginning of my time, along with others on the TDP, developing an application to externally test API endpoints. This was a great opportunity to develop my learning." }' + 
-			', { "title":"Undergraduate Software Analyst/ Developer", "company":"Gamma Telecom Holdings Limited", "location":"Newbury, UK", "dates":"June 2017 - July 2018", "desc":"Working on Horizon dealing mainly with Java, Spring Boot, Wicket, JavaScript, and SQL, updating both the front and back end services of the website. My biggest achievement here was when the other placement student and I took on and completed a project to allow customers to tailor the look of the website to match their theme. This involved understanding and updating a lot of the current code as well as designing database tables to assist the functionality. A lot of interest was generated in this product and it produced a healthy profit." }' + 
-			', { "title":"Audio and Visual Technician", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"September 2010 - August 2019", "desc":"At the main service on Sunday as well as at other events I control the sound and projection.  This also includes checking the equipment before the service and helping guest speakers connect their laptops to our system and transferring files onto our computer." }' + 
-			', { "title":"Youth group Leader", "company":"West End Church & Duncan Road Church", "location":"Fareham, UK & Park Gate, UK", "dates":"September 2010 - August 2019", "desc":"I plan and lead games for groups of children with ages ranging between 4 and 15 at three different youth groups. Two groups range in age from 4 to 11 and a third group caters for 11 to 15 year olds." }' + 
-			', { "title":"Camp Leader", "company":"South Hants Bible Camp & Good News Camp", "location":"Romsey, UK", "dates":"Yearly, August 2012-2017", "desc":"I was responsible for a group of children aged 9 -12 years at South Hants Bible Camps and 8-15 at Good News Camps. Each involved leading activities and assisting with any problems the children may have throughout the week. Health and Safety and Child Protection guidelines were very important and had to be learnt and adhered to. Working as a team and being enthusiastic were important throughout the week." }' + 
-			', { "title":"Sunday School Teacher", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"Yearly, September 2012-2015", "desc":"I helped plan and lead activities and a relating story for a group of children aged between 3 and 10 years on a monthly rota basis. I have also been involved in a children’s ‘fun day’ event for school years reception to year 6 which happens every 3 months." }' + 
-			']}';
-		let exObj = JSON.parse(experienceText);
 		// Loops through the number of experience objects
-		for (let i = 0; i < exObj.experience.length; i++) {
+		for (let i = 0; i < jsonData.profExperience.length; i++) {
 			// Creates an experince div element and adds styles and classes
 			let div = document.createElement('div');
-			div.setAttribute('class', 'experience');
+			div.setAttribute('class', 'prof_experience');
 			div.style.minHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
 			div.style.maxHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
-			div.style.maxWidth = bgBound.width/3 + 'px';
+			div.style.maxWidth = bgBound.width/4 + 'px';
 		
 			let titleEl = document.createElement('p');
-			titleEl.innerHTML = exObj.experience[i].title;
+			titleEl.innerHTML = jsonData.profExperience[i].title;
 			let companyEl = document.createElement('p');
-			companyEl.innerHTML = exObj.experience[i].company;
+			companyEl.innerHTML = jsonData.profExperience[i].company;
+			let datesEl = document.createElement('p');
+			datesEl.innerHTML = jsonData.profExperience[i].dates;
+			let techEl = document.createElement('p');
+			techEl.innerHTML = jsonData.profExperience[i].technologies.join(", ");
 			
 			// Adds the elements to the div then the div element to experience_timeline
 			div.appendChild(titleEl);
 			div.appendChild(companyEl);
-			document.getElementById('experience_timeline').appendChild(div);  
+			div.appendChild(datesEl);
+			div.appendChild(techEl);
+			document.getElementById('prof_experience_timeline').appendChild(div);  
+		}
+		
+	}
+	
+	// Adds experience information to the experience_timeline element
+	function generateVolunteerExperience(jsonData) {
+		let experienceTimeline = document.getElementById('vol_experience_timeline');
+		let bgBound = document.getElementById('three').getBoundingClientRect();
+		// Loops through the number of experience objects
+		for (let i = 0; i < jsonData.volExperience.length; i++) {
+			// Creates an experince div element and adds styles and classes
+			let div = document.createElement('div');
+			div.setAttribute('class', 'vol_experience');
+			div.style.minHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
+			div.style.maxHeight = (bgBound.height-(experienceTimeline.y-bgBound.y)*1.5)/2 + 'px';
+			div.style.maxWidth = bgBound.width/4 + 'px';
+		
+			let titleVEl = document.createElement('p');
+			titleVEl.innerHTML = jsonData.volExperience[i].title;
+			let companyVEl = document.createElement('p');
+			companyVEl.innerHTML = jsonData.volExperience[i].company;
+			let datesVEl = document.createElement('p');
+			datesVEl.innerHTML = jsonData.volExperience[i].dates;
+			
+			// Adds the elements to the div then the div element to experience_timeline
+			div.appendChild(titleVEl);
+			div.appendChild(companyVEl);
+			div.appendChild(datesVEl);
+			document.getElementById('vol_experience_timeline').appendChild(div);  
 		}
 		
 	}
 	
 	// Adds education information to the education_timeline element
-	function generateEducation() {
+	function generateEducation(jsonData) {
 		let educationTimeline = document.getElementById('education_timeline');
-		let bgBound = document.getElementById('three').getBoundingClientRect();
-		// Education JSON object
-		let educationText = '{ "education" : [' +
-			'{ "place":"University of Reading", "level":"BSc Computer Science", "grade":"First Class", "subjects":["Maths","Software Engineering","Databases","Software Quality and Testing","Information Security","Artificial Intelligence"]}' + 
-			', { "place":"Barton Peveril College", "level":"A-Level", "grade":"BBC", "subjects":["Electronics","Computing","Maths"]}' + 
-			', { "place":"Brookfield School", "level":"GCSE", "grade":"10 A*-C", "subjects":["Maths(A)","English(CC)","Science(ABCC)"]}' + 
-			']}';
-		let edObj = JSON.parse(educationText);
+		let bgBound = document.getElementById('four').getBoundingClientRect();
 		// Loops through the number of education objects
-		for (let i = 0; i < edObj.education.length; i++) {
+		for (let i = 0; i < jsonData.education.length; i++) {
 			// Creates an education div element and adds styles and classes
 			let div = document.createElement('div');
 			div.setAttribute('class', 'education');
@@ -216,13 +240,13 @@ $(document).ready(function() {
 			div.style.maxWidth = bgBound.width/3 + 'px';
 		
 			let placeEl = document.createElement('p');
-			placeEl.innerHTML = edObj.education[i].place;
+			placeEl.innerHTML = jsonData.education[i].place;
 			let levelEl = document.createElement('p');
-			levelEl.innerHTML = edObj.education[i].level;
+			levelEl.innerHTML = jsonData.education[i].level;
 			let subjectsEl = document.createElement('p');
-			subjectsEl.innerHTML = edObj.education[i].subjects;
+			subjectsEl.innerHTML = jsonData.education[i].subjects.join(', ');
 			let gradeEl = document.createElement('p');
-			gradeEl.innerHTML = edObj.education[i].grade;
+			gradeEl.innerHTML = jsonData.education[i].grade;
 			
 			// Adds the elements to the div then the div element to education_timeline
 			div.appendChild(placeEl);
@@ -236,7 +260,7 @@ $(document).ready(function() {
 	// Adds programming information to the programming_timeline element
 	function generateProgramming() {
 		let programmingTimeline = document.getElementById('programming_timeline');
-		let bgBound = document.getElementById('four').getBoundingClientRect();
+		let bgBound = document.getElementById('five').getBoundingClientRect();
 		
 		// Creates an programming div element and adds styles and classes
 		let div = document.createElement('div');
@@ -253,7 +277,7 @@ $(document).ready(function() {
 	function generatePhotos() {
 		let photoGallery = document.getElementById('photo_gallery');
 		let navWidth = document.getElementById('nav_bar').getBoundingClientRect().width;
-		let bgWidth = document.getElementById('five').getBoundingClientRect().width;
+		let bgWidth = document.getElementById('six').getBoundingClientRect().width;
 		let photoWidth = (bgWidth-navWidth)/3 + 'px';
 		let numbers = [];
 		// Loops through the number of photos needed
@@ -275,5 +299,25 @@ $(document).ready(function() {
 			div.appendChild(img);
 			photoGallery.appendChild(div);  
 		}
+	}
+
+	// Gets the data
+	function getData(){
+		// JSON object of the date, would be nice to be in a database
+		let pretendDatabase = '{ "profExperience" : [' +
+		'{ "title":"Software Engineer", "company":"Nationwide Building Society", "location":"London, UK", "dates":"April 2021 - January 2022", "technologies":["Java","Spring Boot","Apigee","OpenShift","JavaScript","Mongo DB","Redis","Jenkins","Maven"], "desc":"I was a key member of the team tasked to transition code from external contractors to in-house. Despite many challenges faced, I persevered and remained focused on the project goals. Throughout the process, I collaborated closely with the security team to identify, prioritize and resolve issues in the existing code base." }' + 
+		', { "title":"Analyst", "company":"Nationwide Building Society", "location":"Swindon, UK", "dates":"September 2019 - April 2021", "technologies":["Java","Spring Boot","Apigee","OpenShift","JavaScript","Mongo DB","Redis","Jenkins","Maven"], "desc":"Following a 3-month training course on software development, I joined the digital API hub. This team was mainly focused on Open Banking and I spent the beginning of my time, along with others on the TDP, developing an application to externally test API endpoints. This was a great opportunity to develop my learning." }' + 
+		', { "title":"Undergraduate Software Analyst/ Developer", "company":"Gamma Telecom Holdings Limited", "location":"Newbury, UK", "dates":"June 2017 - July 2018", "technologies":["Java","Spring Boot","Wicket","JavaScript","SQL","Maven"], "desc":"Working on Horizon dealing mainly with Java, Spring Boot, Wicket, JavaScript, and SQL, updating both the front and back end services of the website. My biggest achievement here was when the other placement student and I took on and completed a project to allow customers to tailor the look of the website to match their theme. This involved understanding and updating a lot of the current code as well as designing database tables to assist the functionality. A lot of interest was generated in this product and it produced a healthy profit." }' + 
+		'], "volExperience" : [' +
+		'{ "title":"Audio and Visual Technician", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"September 2010 - August 2019", "desc":"At the main service on Sunday as well as at other events I control the sound and projection.  This also includes checking the equipment before the service and helping guest speakers connect their laptops to our system and transferring files onto our computer." }' + 
+		', { "title":"Youth Group Leader", "company":"West End Church & Duncan Road Church", "location":"Fareham, UK & Park Gate, UK", "dates":"September 2010 - August 2019", "desc":"I plan and lead games for groups of children with ages ranging between 4 and 15 at three different youth groups. Two groups range in age from 4 to 11 and a third group caters for 11 to 15 year olds." }' + 
+		', { "title":"Camp Leader", "company":"South Hants Bible Camp & Good News Camp", "location":"Romsey, UK", "dates":"Yearly, August 2012-2017", "desc":"I was responsible for a group of children aged 9 -12 years at South Hants Bible Camps and 8-15 at Good News Camps. Each involved leading activities and assisting with any problems the children may have throughout the week. Health and Safety and Child Protection guidelines were very important and had to be learnt and adhered to. Working as a team and being enthusiastic were important throughout the week." }' + 
+		', { "title":"Sunday School Teacher", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"Yearly, September 2012-2015", "desc":"I helped plan and lead activities and a relating story for a group of children aged between 3 and 10 years on a monthly rota basis. I have also been involved in a children’s ‘fun day’ event for school years reception to year 6 which happens every 3 months." }' + 
+		'], "education" : [' +
+		'{ "place":"University of Reading", "level":"BSc Computer Science", "grade":"First Class", "subjects":["Maths","Software Engineering","Databases","Software Quality and Testing","Information Security","Artificial Intelligence"]}' + 
+		', { "place":"Barton Peveril College", "level":"A-Level", "grade":"BBC", "subjects":["Electronics","Computing","Maths"]}' + 
+		', { "place":"Brookfield School", "level":"GCSE", "grade":"10 A*-C", "subjects":["Maths(A)","English(CC)","Science(ABCC)"]}' + 
+		']}';
+		return JSON.parse(pretendDatabase);
 	}
 });

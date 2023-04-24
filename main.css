@@ -245,6 +245,10 @@ hr {
 
 .background_five {
 	background-color: #707070;
+}
+
+.background_six {
+	background-color: #c0c0c0;
 	min-height: 100vh;
 }
 
@@ -254,7 +258,7 @@ hr {
 
 #name {
 	display: inline-block;
-	font-size: 3em;
+	font-size: 3.5em;
 	font-weight: bold;
 	margin-bottom: 0;
 }
@@ -280,19 +284,34 @@ hr {
 	padding: 1em;
 }
 
-  /**************/
- /* Experience */
-/**************/
+  /***************************/
+ /* Professional Experience */
+/***************************/
 
-#experience_timeline {
-	padding: 1vh 1vw 1vh 0;
-	display: inline-block;
+#prof_experience_timeline {
+  padding: 1vh 1vw 1vh 0;
+  display: inline-block;
 }
 
-.experience {
-    border-bottom: 3px solid #fff;
-	display: inline-block;
-	padding: 1em;
+.prof_experience {
+  border-bottom: 3px solid #fff;
+  display: inline-block;
+  padding: 1em;
+}
+
+  /************************/
+ /* Volunteer Experience */
+/************************/
+
+#vol_experience_timeline {
+  padding: 1vh 1vw 1vh 0;
+  display: inline-block;
+}
+
+.vol_experience {
+  border-bottom: 3px solid #fff;
+  display: inline-block;
+  padding: 1em;
 }
 
   /*****************/
