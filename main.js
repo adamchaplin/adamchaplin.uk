@@ -71,31 +71,40 @@ $(document).ready(function() {
 	
 	// Updates the navigation dot when a user, or a js function, scrolls
 	$(window).on('scroll', function() {
-		updateNavigation();
+		if($(window).width()/$(window).height()>=1){
+			updateNavigation();
+		}
 		//scrollEffect(); stopped this due to it looking funny with the nav separator
 	});
 
 	// Updates the nav when window is resized
 	$(window).on('resize', function() {
 		loadNav();	
+		updateNavigation();
 	});
 	
 	// Updates different aspects of the nav bar
 	function loadNav() {
-		// Updates the padding for all windows
-		addAllPadding();
-		let navigationListItems = $('#nav_bar li');	
-		// Loop through each navigation item
-		Array.prototype.forEach.call(navigationListItems, function(el) {
-			let label = el.querySelector('.label');
-			let some = label.getBoundingClientRect();
-			// Checks if the aspect ratio is less than 1:1
-			if($(window).width()/$(window).height()<=1){
-				el.style.marginTop = '-' + label.getBoundingClientRect().height + 'px';
-			} else {
-				el.style.marginTop = 0;
-			}
-		});
+		// Checks if the aspect ratio is less than 1:1
+		if($(window).width()/$(window).height()>=1){
+			document.getElementById('nav_bar').style.removeProperty("content-visibility");
+			document.getElementById('nav_separator').style.removeProperty("border");
+			// Updates the padding for all windows
+			addAllPadding(1.04, 1.1);
+			let navigationListItems = $('#nav_bar li');	
+			// Loop through each navigation item
+			Array.prototype.forEach.call(navigationListItems, function(el) {
+				let label = el.querySelector('.label');
+				let some = label.getBoundingClientRect();
+					el.style.marginTop = 0;
+				
+			});
+		} else {
+			document.getElementById('nav_bar').style.contentVisibility = "hidden";
+			document.getElementById('nav_separator').style.border = "hidden";
+			// Updates the padding for all windows
+			addAllPadding(0, 0);
+		}
 	}
 
 	// Updates the navigation dot to highlight the current page
@@ -140,7 +149,7 @@ $(document).ready(function() {
 	}
 	
 	// Adds padding to all backgrounds that need it
-	function addAllPadding() {
+	function addAllPadding(navSeparator, pages) {
 		let navLine = document.getElementById('nav_separator');
 		let aboutBlock = document.getElementById('about_block');
 		let profExperienceTimeline = document.getElementById('prof_experience_timeline');
@@ -149,14 +158,14 @@ $(document).ready(function() {
 		let programmingTimeline = document.getElementById('programming_timeline');
 		let photoGallery = document.getElementById('photo_gallery');
 		let logoBackground = document.getElementById('logo_block');
-		addPadding(navLine, 1.04);
-		addPadding(aboutBlock, 1.1);
-		addPadding(profExperienceTimeline, 1.1);
-		addPadding(volExperienceTimeline, 1.1);
-		addPadding(educationTimeline, 1.1);
-		addPadding(programmingTimeline, 1.1);
-		addPadding(photoGallery, 1.1);
-		addPadding(logoBackground, 1.04);
+		addPadding(navLine, navSeparator);
+		addPadding(aboutBlock, pages);
+		addPadding(profExperienceTimeline, pages);
+		addPadding(volExperienceTimeline, pages);
+		addPadding(educationTimeline, pages);
+		addPadding(programmingTimeline, pages);
+		addPadding(photoGallery, pages);
+		addPadding(logoBackground, navSeparator);
 	}
 	
 	// Adds padding to the element 'el'
