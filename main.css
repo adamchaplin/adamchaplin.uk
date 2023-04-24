@@ -141,6 +141,7 @@ div#contact_block {
 	height: 2.5em;
 	top: 0.6em;
 	z-index: 1;
+	width: max-content;
 }
 
 .contact_icon {

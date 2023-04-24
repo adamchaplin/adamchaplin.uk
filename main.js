@@ -87,6 +87,9 @@ $(document).ready(function() {
 	function loadNav() {
 		// Checks if the aspect ratio is less than 1:1
 		if(isScreenLandscape()){
+			document.getElementById('contact_block').style.removeProperty("left");
+			document.getElementById('contact_block').style.removeProperty("transform");
+			document.getElementById('contact_block').style.removeProperty("right");
 			document.getElementById('nav_bar').style.removeProperty("content-visibility");
 			document.getElementById('nav_separator').style.removeProperty("border");
 			// Updates the padding for all windows
@@ -104,6 +107,9 @@ $(document).ready(function() {
 			document.getElementById('nav_separator').style.border = "hidden";
 			// Updates the padding for all windows
 			addAllPadding(0, 0);
+			document.getElementById('contact_block').style.left = "50%";
+			document.getElementById('contact_block').style.transform = "translate(-50%, 0)";
+			document.getElementById('contact_block').style.right = "auto";
 		}
 	}
 
