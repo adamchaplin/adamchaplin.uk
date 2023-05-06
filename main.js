@@ -92,6 +92,7 @@ $(document).ready(function() {
 			document.getElementById('contact_block').style.removeProperty("right");
 			document.getElementById('nav_bar').style.removeProperty("content-visibility");
 			document.getElementById('nav_separator').style.removeProperty("border");
+
 			// Updates the padding for all windows
 			addAllPadding(1.04, 1.1);
 			let navigationListItems = $('#nav_bar li');	
@@ -102,6 +103,9 @@ $(document).ready(function() {
 					el.style.marginTop = 0;
 				
 			});
+			Array.prototype.forEach.call(document.getElementsByClassName("fa-flickr"), function(el) {
+				el.style.removeProperty("padding")
+			});
 		} else {
 			document.getElementById('nav_bar').style.contentVisibility = "hidden";
 			document.getElementById('nav_separator').style.border = "hidden";
@@ -110,6 +114,9 @@ $(document).ready(function() {
 			document.getElementById('contact_block').style.left = "50%";
 			document.getElementById('contact_block').style.transform = "translate(-50%, 0)";
 			document.getElementById('contact_block').style.right = "auto";
+			Array.prototype.forEach.call(document.getElementsByClassName("fa-flickr"), function(el) {
+				el.style.padding =  "0"
+			});
 			
 		}
 	}
