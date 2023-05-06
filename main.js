@@ -22,7 +22,7 @@ $(document).ready(function() {
 	// Loads all education data on page load
 	generateEducation(jsonData);
 	// Loads all programming data on page load
-	generateProgramming();
+	generateProgramming(jsonData);
 	// Gets a new set of photos on page load
 	generatePhotos();
 	
@@ -110,6 +110,7 @@ $(document).ready(function() {
 			document.getElementById('contact_block').style.left = "50%";
 			document.getElementById('contact_block').style.transform = "translate(-50%, 0)";
 			document.getElementById('contact_block').style.right = "auto";
+			
 		}
 	}
 
@@ -211,7 +212,7 @@ $(document).ready(function() {
 			div.appendChild(companyEl);
 			div.appendChild(datesEl);
 			div.appendChild(techEl);
-			document.getElementById('prof_experience_timeline').appendChild(div);  
+			experienceTimeline.appendChild(div);  
 		}
 		
 	}
@@ -244,7 +245,7 @@ $(document).ready(function() {
 			div.appendChild(titleVEl);
 			div.appendChild(companyVEl);
 			div.appendChild(datesVEl);
-			document.getElementById('vol_experience_timeline').appendChild(div);  
+			experienceTimeline.appendChild(div);  
 		}
 		
 	}
@@ -280,23 +281,48 @@ $(document).ready(function() {
 			div.appendChild(levelEl);
 			div.appendChild(subjectsEl);
 			div.appendChild(gradeEl);
-			document.getElementById('education_timeline').appendChild(div);  
+			educationTimeline.appendChild(div);  
 		}
 	}
 	
 	// Adds programming information to the programming_timeline element
-	function generateProgramming() {
+	function generateProgramming(jsonData) {
 		let programmingTimeline = document.getElementById('programming_timeline');
 		let bgBound = document.getElementById('five').getBoundingClientRect();
-		
-		// Creates an programming div element and adds styles and classes
-		let div = document.createElement('div');
-		div.setAttribute('class', 'programming');
-		div.style.minHeight = (bgBound.height-(programmingTimeline.y-bgBound.y)*1.5)/2 + 'px';
-		div.style.maxHeight = (bgBound.height-(programmingTimeline.y-bgBound.y)*1.5)/2 + 'px';
-		div.style.maxWidth = bgBound.width/3 + 'px';
-		
-		programmingTimeline.appendChild(div);  
+		// Loops through the number of programming objects
+		for (let i = 0; i < jsonData.programming.length; i++) {
+			// Creates an programming div element and adds styles and classes
+			let div = document.createElement('div');
+			div.setAttribute('class', 'programming');
+			div.style.minHeight = (bgBound.height-(programmingTimeline.y-bgBound.y)*1.5)/2 + 'px';
+			div.style.maxHeight = (bgBound.height-(programmingTimeline.y-bgBound.y)*1.5)/2 + 'px';
+			if(isScreenLandscape()){
+				div.style.maxWidth = bgBound.width/3 + 'px';
+			} else {
+				div.style.maxWidth = bgBound.width/1.2 + 'px';
+			}
+
+			let nameEl = document.createElement('p');
+			nameEl.innerHTML = jsonData.programming[i].name;
+			let githubEl = document.createElement('p');
+			let githubLink = document.createElement('a');
+			githubLink.innerHTML = "View code on GitHub";
+			githubLink.href = jsonData.programming[i].githubLink;
+			githubLink.target = "_blank"
+			githubEl.appendChild(githubLink);
+			let deploymentEl = document.createElement('p');
+			let deploymentLink = document.createElement('a');
+			deploymentLink.innerHTML = jsonData.programming[i].deploymentName;
+			deploymentLink.href = jsonData.programming[i].deploymentLink;
+			deploymentLink.target = "_blank"
+			deploymentEl.appendChild(deploymentLink);
+			
+			// Adds the elements to the div then the div element to education_timeline
+			div.appendChild(nameEl);
+			div.appendChild(githubEl);
+			div.appendChild(deploymentEl);
+			programmingTimeline.appendChild(div);  
+		}
 		
 	}
 	
@@ -348,6 +374,9 @@ $(document).ready(function() {
 		'{ "place":"University of Reading", "level":"BSc Computer Science", "grade":"First Class", "subjects":["Maths","Software Engineering","Databases","Software Quality and Testing","Information Security","Artificial Intelligence"]}' + 
 		', { "place":"Barton Peveril College", "level":"A-Level", "grade":"BBC", "subjects":["Electronics","Computing","Maths"]}' + 
 		', { "place":"Brookfield School", "level":"GCSE", "grade":"10 A*-C", "subjects":["Maths(A)","English(CC)","Science(ABCC)"]}' + 
+		'], "programming" : [' +
+		'{ "name": "Website", "githubLink": "https://github.com/adamchaplin/adamchaplin.uk", "deploymentName": "Loop back to here again", "deploymentLink": "https://adamchaplin.uk"}' +
+		', { "name": "Country Counter App", "githubLink": "https://github.com/adamchaplin/CountryCounter","deploymentName": "View on the Google play store", "deploymentLink": "https://play.google.com/store/apps/details?id=uk.co.adamchaplin.countrycounter"}' +
 		']}';
 		return JSON.parse(pretendDatabase);
 	}
