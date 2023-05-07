@@ -188,6 +188,24 @@ $(document).ready(function() {
 		el.style.marginLeft = navWidth*mul + 'px';
 	}
 	
+	// Adds a description pop up display
+	function addDescription(background, desc) {
+		let bgBound = background.getBoundingClientRect();
+		// Creates an experince div element and adds styles and classes
+		let div = document.createElement('div');
+		div.setAttribute('class', 'experience_popup');
+		div.addEventListener('click', function(){ background.removeChild(div) });
+		
+		let descEl = document.createElement("p")
+		descEl.setAttribute('class', 'experience_popup_text');
+		descEl.innerText = desc + "\n Click anywhere to exit"
+		descEl.style.minHeight = (bgBound.height-(background.y-bgBound.y)*1.5)/2 + 'px';
+		descEl.style.maxHeight = (bgBound.height-(background.y-bgBound.y)*1.5)/2 + 'px';
+		
+		div.appendChild(descEl)
+		background.appendChild(div)
+	}
+
 	// Adds experience information to the experience_timeline element
 	function generateProfessionalExperience(jsonData) {
 		let experienceTimeline = document.getElementById('prof_experience_timeline');
@@ -206,19 +224,24 @@ $(document).ready(function() {
 			}
 		
 			let titleEl = document.createElement('p');
-			titleEl.innerHTML = jsonData.profExperience[i].title;
+			titleEl.innerText = jsonData.profExperience[i].title;
 			let companyEl = document.createElement('p');
-			companyEl.innerHTML = jsonData.profExperience[i].company;
+			companyEl.innerText = jsonData.profExperience[i].company;
 			let datesEl = document.createElement('p');
-			datesEl.innerHTML = jsonData.profExperience[i].dates;
+			datesEl.innerText = jsonData.profExperience[i].dates;
 			let techEl = document.createElement('p');
-			techEl.innerHTML = jsonData.profExperience[i].technologies.join(", ");
+			techEl.innerText = jsonData.profExperience[i].technologies.join(", ");
+			let descEl = document.createElement('p');
+			descEl.innerText = "Find out more...";
+			descEl.style.cursor = "pointer"
+			descEl.addEventListener('click', function(){ addDescription(experienceTimeline, jsonData.profExperience[i].desc) });
 			
 			// Adds the elements to the div then the div element to experience_timeline
 			div.appendChild(titleEl);
 			div.appendChild(companyEl);
 			div.appendChild(datesEl);
 			div.appendChild(techEl);
+			div.appendChild(descEl)
 			experienceTimeline.appendChild(div);  
 		}
 		
@@ -242,16 +265,21 @@ $(document).ready(function() {
 			}
 
 			let titleVEl = document.createElement('p');
-			titleVEl.innerHTML = jsonData.volExperience[i].title;
+			titleVEl.innerText = jsonData.volExperience[i].title;
 			let companyVEl = document.createElement('p');
-			companyVEl.innerHTML = jsonData.volExperience[i].company;
+			companyVEl.innerText = jsonData.volExperience[i].company;
 			let datesVEl = document.createElement('p');
-			datesVEl.innerHTML = jsonData.volExperience[i].dates;
+			datesVEl.innerText = jsonData.volExperience[i].dates;
+			let descVEl = document.createElement('p');
+			descVEl.innerText = "Find out more...";
+			descVEl.style.cursor = "pointer"
+			descVEl.addEventListener('click', function(){ addDescription(experienceTimeline, jsonData.volExperience[i].desc) });
 			
 			// Adds the elements to the div then the div element to experience_timeline
 			div.appendChild(titleVEl);
 			div.appendChild(companyVEl);
 			div.appendChild(datesVEl);
+			div.append(descVEl)
 			experienceTimeline.appendChild(div);  
 		}
 		
@@ -275,13 +303,13 @@ $(document).ready(function() {
 			}
 
 			let placeEl = document.createElement('p');
-			placeEl.innerHTML = jsonData.education[i].place;
+			placeEl.innerText = jsonData.education[i].place;
 			let levelEl = document.createElement('p');
-			levelEl.innerHTML = jsonData.education[i].level;
+			levelEl.innerText = jsonData.education[i].level;
 			let subjectsEl = document.createElement('p');
-			subjectsEl.innerHTML = jsonData.education[i].subjects.join(', ');
+			subjectsEl.innerText = jsonData.education[i].subjects.join(', ');
 			let gradeEl = document.createElement('p');
-			gradeEl.innerHTML = jsonData.education[i].grade;
+			gradeEl.innerText = jsonData.education[i].grade;
 			
 			// Adds the elements to the div then the div element to education_timeline
 			div.appendChild(placeEl);
@@ -310,16 +338,16 @@ $(document).ready(function() {
 			}
 
 			let nameEl = document.createElement('p');
-			nameEl.innerHTML = jsonData.programming[i].name;
+			nameEl.innerText = jsonData.programming[i].name;
 			let githubEl = document.createElement('p');
 			let githubLink = document.createElement('a');
-			githubLink.innerHTML = "View code on GitHub";
+			githubLink.innerText = "View code on GitHub";
 			githubLink.href = jsonData.programming[i].githubLink;
 			githubLink.target = "_blank"
 			githubEl.appendChild(githubLink);
 			let deploymentEl = document.createElement('p');
 			let deploymentLink = document.createElement('a');
-			deploymentLink.innerHTML = jsonData.programming[i].deploymentName;
+			deploymentLink.innerText = jsonData.programming[i].deploymentName;
 			deploymentLink.href = jsonData.programming[i].deploymentLink;
 			deploymentLink.target = "_blank"
 			deploymentEl.appendChild(deploymentLink);
@@ -373,16 +401,17 @@ $(document).ready(function() {
 		', { "title":"Analyst", "company":"Nationwide Building Society", "location":"Swindon, UK", "dates":"September 2019 - April 2021", "technologies":["Java","Spring Boot","Apigee","OpenShift","JavaScript","Mongo DB","Redis","Jenkins","Maven"], "desc":"Following a 3-month training course on software development, I joined the digital API hub. This team was mainly focused on Open Banking and I spent the beginning of my time, along with others on the TDP, developing an application to externally test API endpoints. This was a great opportunity to develop my learning." }' + 
 		', { "title":"Undergraduate Software Analyst/ Developer", "company":"Gamma Telecom Holdings Limited", "location":"Newbury, UK", "dates":"June 2017 - July 2018", "technologies":["Java","Spring Boot","Wicket","JavaScript","SQL","Maven"], "desc":"Working on Horizon dealing mainly with Java, Spring Boot, Wicket, JavaScript, and SQL, updating both the front and back end services of the website. My biggest achievement here was when the other placement student and I took on and completed a project to allow customers to tailor the look of the website to match their theme. This involved understanding and updating a lot of the current code as well as designing database tables to assist the functionality. A lot of interest was generated in this product and it produced a healthy profit." }' + 
 		'], "volExperience" : [' +
-		'{ "title":"Audio and Visual Technician", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"September 2010 - August 2019", "desc":"At the main service on Sunday as well as at other events I control the sound and projection.  This also includes checking the equipment before the service and helping guest speakers connect their laptops to our system and transferring files onto our computer." }' + 
-		', { "title":"Youth Group Leader", "company":"West End Church & Duncan Road Church", "location":"Fareham, UK & Park Gate, UK", "dates":"September 2010 - August 2019", "desc":"I plan and lead games for groups of children with ages ranging between 4 and 15 at three different youth groups. Two groups range in age from 4 to 11 and a third group caters for 11 to 15 year olds." }' + 
-		', { "title":"Camp Leader", "company":"South Hants Bible Camp & Good News Camp", "location":"Romsey, UK", "dates":"Yearly, August 2012-2017", "desc":"I was responsible for a group of children aged 9 -12 years at South Hants Bible Camps and 8-15 at Good News Camps. Each involved leading activities and assisting with any problems the children may have throughout the week. Health and Safety and Child Protection guidelines were very important and had to be learnt and adhered to. Working as a team and being enthusiastic were important throughout the week." }' + 
-		', { "title":"Sunday School Teacher", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"Yearly, September 2012-2015", "desc":"I helped plan and lead activities and a relating story for a group of children aged between 3 and 10 years on a monthly rota basis. I have also been involved in a children’s ‘fun day’ event for school years reception to year 6 which happens every 3 months." }' + 
+		'{ "title":"Photographer", "company":"Kings Cross Church", "location":"London, UK", "dates":"October 2021 - Present", "desc":"I capture important moments throughout services and other events. By discovering and using various techniques I strive to provide images with a fresh perspective. I ensure the production of natural and flawless images utilising my keen eye for detail throughout both the shooting and editing stages." }' + 
+		', { "title":"Audio and Visual Technician", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"September 2010 - August 2019", "desc":"At the main service on Sunday as well as at other events I control the sound and projection. My main responsibilities include checking the equipment before the service, helping guest speakers and promtly fixing any issues that may occur while remaining calm." }' + 
+		', { "title":"Youth Group Leader", "company":"West End Church & Duncan Road Church", "location":"Fareham, UK & Park Gate, UK", "dates":"September 2010 - August 2019", "desc":"I planned and led games for groups of children with ages ranging between 4 and 15 at three different youth groups. Two of the groups ranged in age from 4 to 11, while the third group catered to 11 to 15 year olds. I frequently had to think on my feet to ensure that everything ran smoothly." }' + 
+		', { "title":"Camp Leader", "company":"South Hants Bible Camp & Good News Camp", "location":"Romsey, UK", "dates":"Yearly, August 2012-2017", "desc":"I was responsible for a group of children aged 9 to 12 years at South Hants Bible Camp and 8 to 15 years at Good News Camp. My role involved leading activities and providing assistance with any issues the children encountered throughout the week. Health and Safety and Child Protection guidelines were very important and had to be learnt and adhered to. Collaborating as a team and maintaining enthusiasm were essential aspects throughout the week." }' + 
+		', { "title":"Sunday School Teacher", "company":"Network Vineyard Church & West End Church", "location":"Reading, UK & Fareham, UK", "dates":"Yearly, September 2012-2015", "desc":"I helped plan and lead activities and related stories for a group of children aged between 3 and 10 years on a monthly rota basis. Additionally, I was involved in organizing a children\'s \'fun day\' event for school years reception to year 6, which took place every 3 months." }' + 
 		'], "education" : [' +
 		'{ "place":"University of Reading", "level":"BSc Computer Science", "grade":"First Class", "subjects":["Maths","Software Engineering","Databases","Software Quality and Testing","Information Security","Artificial Intelligence"]}' + 
 		', { "place":"Barton Peveril College", "level":"A-Level", "grade":"BBC", "subjects":["Electronics","Computing","Maths"]}' + 
 		', { "place":"Brookfield School", "level":"GCSE", "grade":"10 A*-C", "subjects":["Maths(A)","English(CC)","Science(ABCC)"]}' + 
 		'], "programming" : [' +
-		'{ "name": "Website", "githubLink": "https://github.com/adamchaplin/adamchaplin.uk", "deploymentName": "Loop back to here again", "deploymentLink": "https://adamchaplin.uk"}' +
+		'{ "name": "Portfolio website", "githubLink": "https://github.com/adamchaplin/adamchaplin.uk", "deploymentName": "Loop back to here again", "deploymentLink": "https://adamchaplin.uk"}' +
 		', { "name": "Country Counter App", "githubLink": "https://github.com/adamchaplin/CountryCounter","deploymentName": "View on the Google play store", "deploymentLink": "https://play.google.com/store/apps/details?id=uk.co.adamchaplin.countrycounter"}' +
 		']}';
 		return JSON.parse(pretendDatabase);
